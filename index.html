@@ -97,6 +97,18 @@
   .rv-error p{font-size:13px; color:var(--muted); line-height:1.6;}
 
   .rv-credit{margin-top:18px; font-size:10.5px; color:#5a6488; letter-spacing:.5px;}
+
+  /* Full-screen σε κινητά — η απόδειξη γεμίζει όλη την οθόνη */
+  @media (max-width:480px){
+    body{padding:0;}
+    .sheet{
+      max-width:none; width:100%; flex:1;
+      border-radius:0; box-shadow:none;
+      display:flex; flex-direction:column;
+    }
+    .rv-items{flex:1;}            /* σπρώχνει σύνολα + footer στο κάτω μέρος */
+    .rv-credit{margin:10px 0; color:#7a85b0;}
+  }
 </style>
 </head>
 <body>
