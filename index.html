@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Απόδειξη · TAMAM Grill House</title>
+<style>
+  :root{
+    --bg:#0d0f14; --card:#ffffff; --ink:#1a1a1a; --muted:#777;
+    --line:#e2e2e2; --accent:#f5c842; --green:#2faa5e; --red:#d4453f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:linear-gradient(160deg,#0b0d12,#141a2e);
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    color:var(--ink); min-height:100vh; min-height:100dvh;
+    padding:18px 12px 40px; display:flex; flex-direction:column; align-items:center;
+  }
+  .sheet{
+    width:100%; max-width:420px; background:var(--card); border-radius:16px;
+    box-shadow:0 18px 50px rgba(0,0,0,.5); overflow:hidden;
+  }
+
+  /* Header */
+  .rv-head{
+    background:linear-gradient(135deg,#1c2554,#13183a); color:#fff;
+    padding:22px 20px 18px; text-align:center; position:relative;
+  }
+  .rv-logo{
+    font-weight:800; font-size:24px; letter-spacing:2px;
+    color:var(--accent); line-height:1;
+  }
+  .rv-logo span{color:#fff;}
+  .rv-sub{font-size:11px; color:#9aa3c4; margin-top:4px; letter-spacing:1px; text-transform:uppercase;}
+  .rv-store{font-size:11.5px; color:#c3cbe6; margin-top:8px; line-height:1.5;}
+
+  /* Order badge */
+  .rv-ordbar{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:12px 20px; background:#f7f8fa; border-bottom:1px solid var(--line);
+  }
+  .rv-ordnum{font-weight:800; font-size:18px;}
+  .rv-ordnum .pfx{font-size:13px; color:var(--muted); font-weight:600;}
+  .rv-type{
+    font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.5px;
+    padding:5px 11px; border-radius:50px; color:#fff;
+  }
+  .rv-type.delivery{background:#4a9ef0;}
+  .rv-type.takeaway{background:#38d97a;}
+  .rv-type.table{background:#e0a020;}
+  .rv-meta{font-size:11.5px; color:var(--muted); padding:8px 20px 0; text-align:right;}
+
+  /* Customer */
+  .rv-cust{
+    padding:12px 20px; background:#fffdf4; border-bottom:1px dashed var(--line);
+    font-size:13px; line-height:1.7;
+  }
+  .rv-cust .row{display:flex; gap:8px;}
+  .rv-cust .ico{flex-shrink:0; width:18px; text-align:center;}
+  .rv-cust .ph{font-weight:800; font-size:15px;}
+
+  /* Items */
+  .rv-items{padding:14px 20px;}
+  .rv-item{padding:9px 0; border-bottom:1px solid #f0f0f0;}
+  .rv-item:last-child{border-bottom:none;}
+  .rv-item-top{display:flex; justify-content:space-between; gap:10px; align-items:baseline;}
+  .rv-item-name{font-size:14px; font-weight:600;}
+  .rv-item-name .q{color:var(--accent-ink,#c79400); font-weight:800; margin-right:2px;}
+  .rv-item-price{font-size:14px; font-weight:700; white-space:nowrap;}
+  .rv-item-detail{font-size:11.5px; color:var(--muted); margin-top:3px; line-height:1.5; white-space:pre-line;}
+
+  /* Totals */
+  .rv-totals{padding:14px 20px; background:#f7f8fa; border-top:2px dashed var(--line);}
+  .rv-trow{display:flex; justify-content:space-between; font-size:13px; padding:3px 0; color:#444;}
+  .rv-trow.disc{color:var(--green);}
+  .rv-trow.final{
+    font-size:19px; font-weight:800; color:var(--ink);
+    border-top:1px solid var(--line); margin-top:6px; padding-top:9px;
+  }
+  .rv-pay{
+    margin-top:10px; text-align:center; font-size:13px; font-weight:700;
+    padding:8px; border-radius:8px; background:#fff; border:1px solid var(--line);
+  }
+
+  /* Footer */
+  .rv-foot{padding:16px 20px 20px; text-align:center; color:var(--muted); font-size:11px; line-height:1.6;}
+  .rv-foot b{color:#555;}
+
+  /* Error */
+  .rv-error{
+    max-width:420px; background:#fff; border-radius:16px; padding:36px 26px;
+    text-align:center; box-shadow:0 18px 50px rgba(0,0,0,.5);
+  }
+  .rv-error .em{font-size:42px; margin-bottom:12px;}
+  .rv-error h2{font-size:18px; margin-bottom:8px;}
+  .rv-error p{font-size:13px; color:var(--muted); line-height:1.6;}
+
+  .rv-credit{margin-top:18px; font-size:10.5px; color:#5a6488; letter-spacing:.5px;}
+</style>
+</head>
+<body>
+<div id="rv-root"></div>
+<div class="rv-credit">TAMAM Grill House · Ψηφιακό αντίγραφο απόδειξης</div>
+
+<script>
+/* ── LZ-String 1.5.0 (MIT, ενσωματωμένο για offline λειτουργία) ───────────── */
+var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",n="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-$",e={};function t(r,o){if(!e[r]){e[r]={};for(var n=0;n<r.length;n++)e[r][r.charAt(n)]=n}return e[r][o]}var i={decompressFromBase64:function(r){return null==r?"":""==r?null:i._decompress(r.length,32,function(n){return t(o,r.charAt(n))})},compressToEncodedURIComponent:function(r){return null==r?"":i._compress(r,6,function(r){return n.charAt(r)})},decompressFromEncodedURIComponent:function(r){return null==r?"":""==r?null:(r=r.replace(/ /g,"+"),i._decompress(r.length,32,function(o){return t(n,r.charAt(o))}))},_compress:function(r,o,n){if(null==r)return"";var e,t,i,s={},u={},a="",p="",c="",l=2,f=3,h=2,d=[],m=0,v=0;for(i=0;i<r.length;i+=1)if(a=r.charAt(i),Object.prototype.hasOwnProperty.call(s,a)||(s[a]=f++,u[a]=!0),p=c+a,Object.prototype.hasOwnProperty.call(s,p))c=p;else{if(Object.prototype.hasOwnProperty.call(u,c)){if(c.charCodeAt(0)<256){for(e=0;e<h;e++)m<<=1,v==o-1?(v=0,d.push(n(m)),m=0):v++;for(t=c.charCodeAt(0),e=0;e<8;e++)m=m<<1|1&t,v==o-1?(v=0,d.push(n(m)),m=0):v++,t>>=1}else{for(t=1,e=0;e<h;e++)m=m<<1|t,v==o-1?(v=0,d.push(n(m)),m=0):v++,t=0;for(t=c.charCodeAt(0),e=0;e<16;e++)m=m<<1|1&t,v==o-1?(v=0,d.push(n(m)),m=0):v++,t>>=1}0==--l&&(l=Math.pow(2,h),h++),delete u[c]}else for(t=s[c],e=0;e<h;e++)m=m<<1|1&t,v==o-1?(v=0,d.push(n(m)),m=0):v++,t>>=1;0==--l&&(l=Math.pow(2,h),h++),s[p]=f++,c=String(a)}if(""!==c){if(Object.prototype.hasOwnProperty.call(u,c)){if(c.charCodeAt(0)<256){for(e=0;e<h;e++)m<<=1,v==o-1?(v=0,d.push(n(m)),m=0):v++;for(t=c.charCodeAt(0),e=0;e<8;e++)m=m<<1|1&t,v==o-1?(v=0,d.push(n(m)),m=0):v++,t>>=1}else{for(t=1,e=0;e<h;e++)m=m<<1|t,v==o-1?(v=0,d.push(n(m)),m=0):v++,t=0;for(t=c.charCodeAt(0),e=0;e<16;e++)m=m<<1|1&t,v==o-1?(v=0,d.push(n(m)),m=0):v++,t>>=1}0==--l&&(l=Math.pow(2,h),h++),delete u[c]}else for(t=s[c],e=0;e<h;e++)m=m<<1|1&t,v==o-1?(v=0,d.push(n(m)),m=0):v++,t>>=1;0==--l&&(l=Math.pow(2,h),h++)}for(t=2,e=0;e<h;e++)m=m<<1|1&t,v==o-1?(v=0,d.push(n(m)),m=0):v++,t>>=1;for(;;){if(m<<=1,v==o-1){d.push(n(m));break}v++}return d.join("")},_decompress:function(o,n,e){var t,i,s,u,a,p,c,l=[],f=4,h=4,d=3,m="",v=[],g={val:e(0),position:n,index:1};for(t=0;t<3;t+=1)l[t]=t;for(s=0,a=Math.pow(2,2),p=1;p!=a;)u=g.val&g.position,g.position>>=1,0==g.position&&(g.position=n,g.val=e(g.index++)),s|=(u>0?1:0)*p,p<<=1;switch(s){case 0:for(s=0,a=Math.pow(2,8),p=1;p!=a;)u=g.val&g.position,g.position>>=1,0==g.position&&(g.position=n,g.val=e(g.index++)),s|=(u>0?1:0)*p,p<<=1;c=r(s);break;case 1:for(s=0,a=Math.pow(2,16),p=1;p!=a;)u=g.val&g.position,g.position>>=1,0==g.position&&(g.position=n,g.val=e(g.index++)),s|=(u>0?1:0)*p,p<<=1;c=r(s);break;case 2:return""}for(l[3]=c,i=c,v.push(c);;){if(g.index>o)return"";for(s=0,a=Math.pow(2,d),p=1;p!=a;)u=g.val&g.position,g.position>>=1,0==g.position&&(g.position=n,g.val=e(g.index++)),s|=(u>0?1:0)*p,p<<=1;switch(c=s){case 0:for(s=0,a=Math.pow(2,8),p=1;p!=a;)u=g.val&g.position,g.position>>=1,0==g.position&&(g.position=n,g.val=e(g.index++)),s|=(u>0?1:0)*p,p<<=1;l[h++]=r(s),c=h-1,f--;break;case 1:for(s=0,a=Math.pow(2,16),p=1;p!=a;)u=g.val&g.position,g.position>>=1,0==g.position&&(g.position=n,g.val=e(g.index++)),s|=(u>0?1:0)*p,p<<=1;l[h++]=r(s),c=h-1,f--;break;case 2:return v.join("")}if(0==f&&(f=Math.pow(2,d),d++),l[c])m=l[c];else{if(c!==h)return null;m=i+i.charAt(0)}v.push(m),l[h++]=i+m.charAt(0),i=m,0==--f&&(f=Math.pow(2,d),d++)}}};return i}();
+
+/* ── Helpers ──────────────────────────────────────────────────────────────── */
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function fmt(n){return (Math.round((+n||0)*100)/100).toFixed(2).replace('.',',')+' €';}
+
+function typeClass(ty){
+  const t=(ty||'').toLowerCase();
+  if(t.indexOf('deliv')>=0) return 'delivery';
+  if(t.indexOf('away')>=0 || t.indexOf('take')>=0) return 'takeaway';
+  return 'table';
+}
+
+/* Render όμορφης απόδειξης από το αποσυμπιεσμένο object */
+function render(d){
+  const st = d.st || {};
+  const storeLines = [st.a, [st.p?('Τηλ: '+st.p):'', st.f?('ΑΦΜ: '+st.f):''].filter(Boolean).join(' · ')].filter(Boolean);
+
+  // Customer block (delivery: όλα· takeaway: phone/name)
+  let custHtml = '';
+  if(d.c){
+    const c=d.c, rows=[];
+    if(c.p)  rows.push(`<div class="row"><span class="ico">📞</span><span class="ph">${esc(c.p)}</span></div>`);
+    if(c.n)  rows.push(`<div class="row"><span class="ico">👤</span><span>${esc(c.n)}</span></div>`);
+    if(c.a)  rows.push(`<div class="row"><span class="ico">📍</span><span>${esc(c.a)}</span></div>`);
+    if(c.f||c.b) rows.push(`<div class="row"><span class="ico">🏢</span><span>${esc(c.f||'')}${c.b?(' · Κουδ: '+esc(c.b)):''}</span></div>`);
+    if(c.no) rows.push(`<div class="row"><span class="ico">📝</span><span>${esc(c.no)}</span></div>`);
+    if(rows.length) custHtml = `<div class="rv-cust">${rows.join('')}</div>`;
+  }
+
+  // Items
+  const items = (d.it||[]).map(it=>{
+    const name=it[0], qty=it[1], price=it[2], detail=it[3];
+    return `<div class="rv-item">
+      <div class="rv-item-top">
+        <span class="rv-item-name"><span class="q">${esc(qty)}×</span>${esc(name)}</span>
+        <span class="rv-item-price">${fmt(price)}</span>
+      </div>
+      ${detail?`<div class="rv-item-detail">${esc(detail)}</div>`:''}
+    </div>`;
+  }).join('');
+
+  // Totals
+  let totals = '';
+  if(d.sc>0) totals += `<div class="rv-trow"><span>Χρέωση περιοχής</span><span>+${fmt(d.sc)}</span></div>`;
+  if(d.di>0) totals += `<div class="rv-trow disc"><span>Έκπτωση</span><span>−${fmt(d.di)}</span></div>`;
+  const subShown = (d.sc>0 || d.di>0);
+  const subRow = subShown ? `<div class="rv-trow"><span>Σύνολο</span><span>${fmt(d.su)}</span></div>` : '';
+
+  const payTxt = d.pm==='card' ? '💳 Κάρτα' : '💵 Μετρητά';
+
+  document.getElementById('rv-root').innerHTML = `
+    <div class="sheet">
+      <div class="rv-head">
+        <div class="rv-logo">TAMAM<span> GRILL HOUSE</span></div>
+        <div class="rv-sub">Απόδειξη παραγγελίας</div>
+        ${storeLines.length?`<div class="rv-store">${storeLines.map(esc).join('<br>')}</div>`:''}
+      </div>
+      <div class="rv-ordbar">
+        <div class="rv-ordnum">${esc(d.n||'')}</div>
+        <span class="rv-type ${typeClass(d.ty)}">${esc(d.ty||'')}</span>
+      </div>
+      <div class="rv-meta">${esc(d.dt||'')} ${esc(d.tm||'')}</div>
+      ${custHtml}
+      <div class="rv-items">${items || '<div style="text-align:center;color:#999;font-size:13px;padding:10px;">—</div>'}</div>
+      <div class="rv-totals">
+        ${subRow}${totals}
+        <div class="rv-trow final"><span>ΣΥΝΟΛΟ</span><span>${fmt(d.fi)}</span></div>
+        <div class="rv-pay">${payTxt}</div>
+      </div>
+      <div class="rv-foot">
+        <b>Ευχαριστούμε!</b><br>Μη φορολογικό παραστατικό — ψηφιακό αντίγραφο
+      </div>
+    </div>`;
+}
+
+function showError(msg){
+  document.getElementById('rv-root').innerHTML = `
+    <div class="rv-error">
+      <div class="em">🧾</div>
+      <h2>Δεν φορτώθηκε η απόδειξη</h2>
+      <p>${esc(msg)}</p>
+    </div>`;
+}
+
+/* ── Boot ─────────────────────────────────────────────────────────────────── */
+(function(){
+  try{
+    const hash = location.hash.replace(/^#/,'').trim();
+    if(!hash){ showError('Δεν υπάρχουν δεδομένα στον σύνδεσμο. Σκάναρε ξανά το QR από την απόδειξη.'); return; }
+    const json = LZString.decompressFromEncodedURIComponent(hash);
+    if(!json){ showError('Ο σύνδεσμος είναι αλλοιωμένος ή ελλιπής.'); return; }
+    const data = JSON.parse(json);
+    render(data);
+    document.title = (data.n?('#'+data.n+' · '):'') + 'Απόδειξη · TAMAM';
+  }catch(e){
+    showError('Σφάλμα ανάγνωσης δεδομένων.');
+  }
+})();
+</script>
+</body>
+</html>
