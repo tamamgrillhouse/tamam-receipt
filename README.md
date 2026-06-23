@@ -1,0 +1,53 @@
+# TAMAM — Receipt Viewer (σελίδα προβολής QR αποκόμματος)
+
+Στατική σελίδα προβολής για το **QR αποκόμματος** του TAMAM POS (Άξονας Α).
+Σκανάρεις το QR από την απόδειξη → ανοίγει αυτή η σελίδα → δείχνει όλη την απόδειξη στο κινητό.
+
+## Πώς δουλεύει (offline / self-contained)
+
+- Όλα τα δεδομένα της απόδειξης είναι **συμπιεσμένα μέσα στο QR** (LZ-String), στο `#hash` του URL.
+- Η σελίδα τα αποσυμπιέζει τοπικά (το LZ-String είναι ενσωματωμένο — δεν χρειάζεται internet/CDN).
+- **Καμία βάση δεδομένων, κανένα backend.** Η σελίδα δεν αποθηκεύει τίποτα.
+
+## Deployment (μία φορά)
+
+> ⚠️ Φτιάξε **ΞΕΧΩΡΙΣΤΟ** repo — όχι το repo του POS. Αυτό το repo περιέχει μόνο αυτό το αρχείο,
+> τίποτα ευαίσθητο. Έτσι ο πελάτης που σκανάρει δεν αγγίζει ποτέ τον κώδικα του POS.
+
+1. Φτιάξε νέο public repo στο GitHub, π.χ. **`tamam-receipt`**.
+2. Ανέβασε το `index.html` (αυτού του φακέλου) στο root του repo.
+3. Settings → Pages → Source: `main` branch, φάκελος `/root` → Save.
+4. Μετά από ~1 λεπτό η σελίδα ζει στο: `https://USERNAME.github.io/tamam-receipt/`
+5. Αντίγραψε αυτό το URL στο POS: **Admin → Ρυθμίσεις → Εκτύπωση → 🧾 QR Απόδειξης → URL σελίδας προβολής**.
+
+> Εναλλακτικά (κρατά τον κώδικα ιδιωτικό): Cloudflare Pages ή Netlify με private repo.
+
+## Τοπικό test (πριν το deploy)
+
+Άνοιξε στον browser:
+```
+receipt-viewer/index.html
+```
+Θα δεις μήνυμα «Δεν φορτώθηκε» (κανονικό — λείπει το hash). Για να δεις δείγμα απόδειξης,
+πρόσθεσε στο τέλος του URL το περιεχόμενο του `SAMPLE-HASH.txt`, π.χ.:
+```
+receipt-viewer/index.html#NoIg...   (όλο το hash από το SAMPLE-HASH.txt)
+```
+
+## Σχήμα δεδομένων (compact JSON, παράγεται από `generateReceiptQR` στο receipt.js)
+
+```js
+{
+  v:1,                       // version
+  n:"TA-5",                  // αριθμός παραγγελίας
+  ty:"Take Away",            // τύπος (Delivery / Take Away / Τραπέζι N)
+  dt:"18-06-2026", tm:"21:40",
+  st:{ a, p, f },            // store: address, phone, ΑΦΜ
+  it:[[name, qty, price, detail], ...],
+  su, sc, di, fi,            // subtotal, surcharge, discount, final
+  pm:"cash"|"card",
+  c:{ p, n, a, f, b, no }    // customer (προαιρετικό — admin toggle receiptQrCustomer)
+}
+```
+
+Κρατά συγχρονισμένο το σχήμα ανάμεσα σε `receipt.js → generateReceiptQR()` και `index.html → render()`.
