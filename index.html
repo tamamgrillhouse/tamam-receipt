@@ -197,7 +197,7 @@ function showError(msg){
   document.getElementById('rv-root').innerHTML = `
     <div class="rv-error">
       <div class="em">🧾</div>
-      <h2>Δεν φορτώθηκε η απόδειξη</h2>
+      <h2>Δεν φορτώθηκε η παραγγελία</h2>
       <p>${esc(msg)}</p>
     </div>`;
 }
@@ -206,12 +206,12 @@ function showError(msg){
 (function(){
   try{
     const hash = location.hash.replace(/^#/,'').trim();
-    if(!hash){ showError('Δεν υπάρχουν δεδομένα στον σύνδεσμο. Σκάναρε ξανά το QR από την απόδειξη.'); return; }
+    if(!hash){ showError('Δεν υπάρχουν δεδομένα στον σύνδεσμο. Σκάναρε ξανά το QR από το απόκομμα.'); return; }
     const json = LZString.decompressFromEncodedURIComponent(hash);
     if(!json){ showError('Ο σύνδεσμος είναι αλλοιωμένος ή ελλιπής.'); return; }
     const data = JSON.parse(json);
     render(data);
-    document.title = (data.n?('#'+data.n+' · '):'') + 'Απόδειξη · TAMAM';
+    document.title = (data.n?('#'+data.n+' · '):'') + 'Παραγγελία · TAMAM';
   }catch(e){
     showError('Σφάλμα ανάγνωσης δεδομένων.');
   }
