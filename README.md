@@ -45,9 +45,14 @@ receipt-viewer/index.html#NoIg...   (όλο το hash από το SAMPLE-HASH.tx
   st:{ a, p, f },            // store: address, phone, ΑΦΜ
   it:[[name, qty, price, detail], ...],
   su, sc, di, fi,            // subtotal, surcharge, discount, final
-  pm:"cash"|"card",
-  c:{ p, n, a, f, b, no }    // customer (προαιρετικό — admin toggle receiptQrCustomer)
+  pm:"cash"|"card"
 }
 ```
+
+⚠️ **Το `c` (στοιχεία πελάτη) ΔΕΝ στέλνεται πλέον** (POS, 21-08-2026): ο πελάτης σκανάρει τη δική
+του απόδειξη και τα ξέρει ήδη, ενώ σε μηχαναγνώσιμη μορφή πάνω σε χαρτί που πετιέται είναι καθαρό
+ρίσκο ιδιωτικότητας — και ήταν το 36% του όγκου του QR, που το έκανε άσκαναρο στα 58mm.
+Το `render()` **κρατά** τον χειρισμό του (`if(d.c)`) ώστε παλιά, ήδη τυπωμένα QR να δείχνουν σωστά.
+❌ Μην το ξαναπροσθέσεις στον POS.
 
 Κρατά συγχρονισμένο το σχήμα ανάμεσα σε `receipt.js → generateReceiptQR()` και `index.html → render()`.
