@@ -130,6 +130,28 @@ function typeClass(ty){
   return 'table';
 }
 
+/* 🔴 ΣΧΗΜΑ v2 → ΕΣΩΤΕΡΙΚΗ ΜΟΡΦΗ.
+   Το v2 (24-08-2026) πετάει τα στοιχεία καταστήματος (η σελίδα ΑΝΗΚΕΙ στο κατάστημα),
+   κρατά ακέραια λεπτά και μία ημερομηνία 10 χαρακτήρων — ώστε το QR να πέσει από
+   69×69 σε 61×61 τετραγωνάκια και να διαβάζεται από κάμερα κινητού.
+   ⚠️ ΤΟ v1 ΠΕΡΝΑΕΙ ΑΝΕΠΑΦΟ: αποδείξεις που ήδη κυκλοφορούν σε τσέπες πελατών
+   ΠΡΕΠΕΙ να συνεχίσουν να ανοίγουν. ❌ ΠΟΤΕ μη σβήσεις αυτόν τον κλάδο. */
+function normalize(d){
+  if(!d || d.v !== 2) return d || {};
+  const TY = {1:'Delivery', 2:'Take Away'};
+  const PM = {c:'cash', k:'card', m:'mixed', p:'credit'};
+  const g  = String(d.d||'');
+  return {
+    n:  d.n || '',
+    ty: TY[d.t] || d.tl || '',
+    dt: g.length>=6  ? g.slice(0,2)+'-'+g.slice(2,4)+'-20'+g.slice(4,6) : '',
+    tm: g.length>=10 ? g.slice(6,8)+':'+g.slice(8,10) : '',
+    it: (d.i||[]).map(r => [r[0], r[1], (r[2]||0)/100, r[3]||'']),
+    su: (d.s||0)/100, sc: (d.sc||0)/100, di: (d.di||0)/100,
+    fi: (d.f||0)/100, pm: PM[d.p] || 'cash',
+  };
+}
+
 /* Render όμορφης απόδειξης από το αποσυμπιεσμένο object */
 function render(d){
   const st = d.st || {};
@@ -166,7 +188,10 @@ function render(d){
   const subShown = (d.sc>0 || d.di>0);
   const subRow = subShown ? `<div class="rv-trow"><span>Σύνολο</span><span>${fmt(d.su)}</span></div>` : '';
 
-  const payTxt = d.pm==='card' ? '💳 Κάρτα' : '💵 Μετρητά';
+  const payTxt = d.pm==='card'  ? '💳 Κάρτα'
+               : d.pm==='mixed' ? '🧾 Μεικτή'
+               : d.pm==='credit'? '📋 Επί Πιστώσει'
+               : '💵 Μετρητά';
 
   document.getElementById('rv-root').innerHTML = `
     <div class="sheet">
@@ -209,7 +234,7 @@ function showError(msg){
     if(!hash){ showError('Δεν υπάρχουν δεδομένα στον σύνδεσμο. Σκάναρε ξανά το QR από το απόκομμα.'); return; }
     const json = LZString.decompressFromEncodedURIComponent(hash);
     if(!json){ showError('Ο σύνδεσμος είναι αλλοιωμένος ή ελλιπής.'); return; }
-    const data = JSON.parse(json);
+    const data = normalize(JSON.parse(json));
     render(data);
     document.title = (data.n?('#'+data.n+' · '):'') + 'Παραγγελία · TAMAM';
   }catch(e){
